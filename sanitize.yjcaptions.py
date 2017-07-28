@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import re
 import os
 import sys
@@ -33,6 +35,7 @@ def make_caption_dataset():
     image_id = "%012d"%ann["image_id"]
     #print( "%012d"%image_id )
     caption  = ann["caption"]
+    m.parse('')
     kana = parseKana( m.parse( caption ).strip()  )
     print( kana )
     if id_capkana.get(image_id) is None:
@@ -77,7 +80,7 @@ def resize_serialize():
   target_size = (150, 150)
   id_capkana  = pickle.loads( open("id_capkana.screened.pkl", "rb").read() )
   num_names   = [(re.search(r"(\d{1,})\.jpg", line).group(1), line) for line \
-      in glob.glob("../coco2014/train2014/*.jpg")]  
+      in glob.glob("dataset/train2014/*.jpg")]  
  
   for nn in num_names:
     id   = nn[0]
